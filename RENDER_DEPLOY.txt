@@ -1,0 +1,40 @@
+SAIDUL UDP LEVEL — SINGLE RENDER WEB SERVICE
+
+Render settings:
+  Service type: Web Service
+  Build command: pip install -r requirements.txt
+  Start command: python run.py
+
+Process/port layout:
+  - run.py starts api.py first and waits for internal port 8080.
+  - api.py listens on 127.0.0.1:8080 and exposes /health for an internal health check.
+  - run.py starts main.py second.
+  - main.py serves the public dashboard on 0.0.0.0:$PORT (Render provides PORT).
+  - The dashboard calls the internal API at http://127.0.0.1:8080 by default.
+  - Optional Render environment variable: BR_API_BASE=http://127.0.0.1:8080
+
+Dashboard fixes:
+  - Fixed an inline JavaScript newline-escaping issue that prevented the dashboard
+    script from running and left the header at -- and 0/0.
+  - Dashboard now shows a visible error if /api/stats cannot be loaded.
+  - Added per-account EXP progress toward the next level, including percentage and
+    remaining EXP. The cumulative EXP table is community-published and may change;
+    the live level/EXP returned by the game is authoritative.
+  - Added an explicit /health endpoint for the BR API status indicator.
+
+Important:
+  - Keep the GitHub repository private if it contains account/session files.
+  - Render's filesystem is ephemeral unless a persistent disk is attached.
+  - Do not set PORT manually; Render injects it.
+
+
+GRADUAL ACCOUNT RUNNING
+-----------------------
+Set this Render Environment Variable to control simultaneous workers per user:
+
+MAX_WORKERS_PER_USER=5
+
+Use 1-5 to start small, then increase gradually (up to 200 only if your plan and server resources support it).
+Imported accounts within the user's purchased slot limit remain saved; only the configured number run concurrently.
+The queue scheduler checks every 10 seconds and fills newly available worker slots.
+This setting does not increase the user's plan slots.

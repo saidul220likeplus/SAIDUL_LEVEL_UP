@@ -1,0 +1,16 @@
+MULTI-HOST DEPLOYMENT
+
+This is a long-running Python service (dashboard + private API), not a serverless function.
+
+Render / Railway / similar PaaS:
+- Use the included Procfile: web: python run.py
+- Expose the service's assigned PORT; do not hardcode the public port.
+- Keep one replica unless you have shared persistent storage and coordinated workers.
+
+VPS / Linux:
+- Install requirements, then run: python run.py
+- Optional: PORT=20335 BR_API_PORT=8080 python run.py
+- Put a reverse proxy (for example, Nginx/Caddy) in front if using a domain/HTTPS.
+
+Other hosts must support persistent Python processes and allow a web port to be bound.
+Serverless/function-only hosts are not supported for this always-on worker design.
