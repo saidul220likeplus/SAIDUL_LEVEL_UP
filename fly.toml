@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for saidul-level-up on 2026-10-12T20:55:40Z
+# fly.toml app configuration file generated for saidul-level-up-esxjqg on 2026-10-12T21:03:19Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'saidul-level-up'
+app = 'saidul-level-up-esxjqg'
 primary_region = 'ams'
 
 [build]
