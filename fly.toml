@@ -8,15 +8,13 @@ primary_region = "ams"
   PORT = "8080"
 
 [http_service]
-  auto_start_machines = true
-  auto_stop_machines = false
+  internal_port = 8080
   force_https = true
-  internal_port = 8_080
-  min_machines_running = 1
+  auto_stop_machines = "off"
+  auto_start_machines = true
   processes = ["app"]
 
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
-  memory = "1gb"
   memory_mb = 256
