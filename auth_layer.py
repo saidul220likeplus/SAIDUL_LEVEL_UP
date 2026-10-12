@@ -55,7 +55,7 @@ BULK_PAUSE_TIMEOUT = 60
 # ============================================================
 # AUTO STOP → RESTART CONFIG  ✅ 1 HOUR
 # ============================================================
-AUTO_RESTART_INTERVAL = max(60, int(os.getenv("AUTO_RESTART_INTERVAL", "180")))
+AUTO_RESTART_INTERVAL = max(60, int(os.getenv("AUTO_RESTART_INTERVAL", "1200")))
 AUTO_RESTART_WAIT = max(2, int(os.getenv("AUTO_RESTART_WAIT", "10")))
 SCHEDULER_TICK = max(5, int(os.getenv("AUTO_SCHEDULER_TICK", "10")))
 
